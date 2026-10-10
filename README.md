@@ -9,30 +9,48 @@ Two add-ons for [keylimesoda/omarchy-turbo-pascal-theme](https://github.com/keyl
 
 ![Unlock screen preview](preview-unlock.png)
 
-## Install / reapply after a theme update
+## Install / update
 
-Run this whenever the Turbo Pascal theme is installed or updated. It downloads
-this repo to a temporary folder, copies the extras into the theme folder, and
-cleans up:
+Run this to install the theme with full styling, or to update it later. It
+downloads this repo to a temporary folder, runs `install.sh`, and cleans up:
 
 ```bash
-tmp=$(mktemp -d) && git clone --depth 1 https://github.com/keasbeexd/omarchy-turbo-pascal-extras.git "$tmp" && cp -r "$tmp"/unlock.png "$tmp"/preview-unlock.png "$tmp"/backgrounds ~/.config/omarchy/themes/turbo-pascal/ && rm -rf "$tmp"
+tmp=$(mktemp -d) && git clone --depth 1 https://github.com/keasbeexd/omarchy-turbo-pascal-extras.git "$tmp" && "$tmp/install.sh"; rm -rf "$tmp"
 ```
 
-Then apply the unlock screen to the boot screen (asks for your sudo password;
-run it as your normal user, not with `sudo`):
+Run it as your normal user, not with `sudo`. It asks for your sudo password once,
+when it sets the boot screen.
+
+`install.sh` runs the full update process:
 
 ```bash
+omarchy theme install https://github.com/keylimesoda/omarchy-turbo-pascal-theme.git
+rm -rf ~/.config/omarchy/themes/turbo-pascal/.git
+# copy unlock.png, preview-unlock.png and backgrounds/ into the theme folder
+omarchy theme set turbo-pascal
 omarchy-plymouth-set-by-theme turbo-pascal
 ```
 
-Typical update flow:
+### Why reinstall instead of `omarchy theme update`?
 
-```bash
-omarchy theme update
-# rerun the extras command above
-omarchy-plymouth-set-by-theme turbo-pascal
-```
+The theme only loads its full styling once its `.git` folder is removed
+([see the theme's README](https://github.com/keylimesoda/omarchy-turbo-pascal-theme#install)).
+Without `.git`, `omarchy theme update` skips the theme, so updating means
+installing a fresh copy. That replaces the whole theme folder, which also
+deletes the extras, so they're copied back in afterwards.
+
+Deleting `.git` lets Omarchy run the theme's scripts. The upstream README
+recommends reviewing the theme's code first, so check its changes before
+running an update.
+
+### Options
+
+Add these after `install.sh` in the command above:
+
+| Option | Effect |
+|---|---|
+| `--extras-only` | Don't reinstall the theme; just recopy the extras and reapply it |
+| `--no-plymouth` | Skip setting the boot screen (no sudo prompt) |
 
 ## Where the files go
 
