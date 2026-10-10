@@ -28,6 +28,7 @@ omarchy theme install https://github.com/keylimesoda/omarchy-turbo-pascal-theme.
 rm -rf ~/.config/omarchy/themes/turbo-pascal/.git
 # copy unlock.png, preview-unlock.png and backgrounds/ into the theme folder
 omarchy theme set turbo-pascal
+omarchy theme bg set ~/.config/omarchy/themes/turbo-pascal/backgrounds/19-panorama-night.png
 omarchy-plymouth-set-by-theme turbo-pascal
 ```
 
@@ -51,6 +52,7 @@ Add these after `install.sh` in the command above:
 |---|---|
 | `--extras-only` | Don't reinstall the theme; just recopy the extras and reapply it |
 | `--no-plymouth` | Skip setting the boot screen (no sudo prompt) |
+| `--keep-bg` | Don't switch to the panoramic background |
 
 ## Where the files go
 
@@ -65,7 +67,8 @@ Files are copied rather than symlinked, because Omarchy refuses a symlinked
 
 ## Using the panoramic background
 
-Cycle to it with:
+`install.sh` switches to it automatically (unless you pass `--keep-bg`).
+To cycle through the theme's backgrounds afterwards:
 
 ```bash
 omarchy theme bg next

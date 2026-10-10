@@ -4,12 +4,13 @@
 #   1. omarchy theme install  (fresh clone; replaces the theme folder)
 #   2. remove the theme's .git so Omarchy loads its full styling
 #   3. copy unlock.png, preview-unlock.png and backgrounds into the theme
-#   4. omarchy theme set turbo-pascal
+#   4. omarchy theme set turbo-pascal, then switch to the panoramic background
 #   5. omarchy-plymouth-set-by-theme turbo-pascal  (asks for sudo)
 #
 # Options:
 #   --extras-only   skip steps 1-2 (just recopy the extras into the current theme)
 #   --no-plymouth   skip step 5
+#   --keep-bg       don't switch to the panoramic background
 set -euo pipefail
 
 theme=turbo-pascal
@@ -19,10 +20,12 @@ src="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 extras_only=false
 plymouth=true
+set_bg=true
 for arg in "$@"; do
   case $arg in
     --extras-only) extras_only=true ;;
     --no-plymouth) plymouth=false ;;
+    --keep-bg) set_bg=false ;;
     *) echo "Unknown option: $arg" >&2; exit 1 ;;
   esac
 done
@@ -49,6 +52,10 @@ cp -- "$src"/backgrounds/* "$theme_dir/backgrounds/"
 echo "Extras copied into $theme_dir"
 
 omarchy theme set "$theme"
+
+if $set_bg; then
+  omarchy theme bg set "$theme_dir/backgrounds/19-panorama-night.png"
+fi
 
 if $plymouth; then
   omarchy-plymouth-set-by-theme "$theme"
