@@ -1,6 +1,8 @@
 # Turbo Pascal Theme Extras for Omarchy
 
-Two add-ons for [keylimesoda/omarchy-turbo-pascal-theme](https://github.com/keylimesoda/omarchy-turbo-pascal-theme):
+Two add-ons for [keylimesoda/omarchy-turbo-pascal-theme](https://github.com/keylimesoda/omarchy-turbo-pascal-theme),
+branch `main` — the branch the theme's own README installs from, and the one
+`omarchy theme install` clones:
 
 - **Unlock screen** – `unlock.png` (and its `preview-unlock.png`), used by Omarchy
   for the Plymouth boot / disk-unlock screen.
@@ -73,3 +75,16 @@ To cycle through the theme's backgrounds afterwards:
 ```bash
 omarchy theme bg next
 ```
+
+## Licence
+
+MIT, Copyright (c) 2026 Marc Ferro @keasbeexd — see [LICENSE](LICENSE).
+
+The theme these extras are for is keylimesoda's
+[omarchy-turbo-pascal-theme](https://github.com/keylimesoda/omarchy-turbo-pascal-theme),
+branch `main`, MIT licensed, Copyright (c) 2026 keylimesoda. The unlock screen
+and the panoramic background are drawn to match that theme's artwork; any file
+taken from or derived from the theme stays under the theme's own MIT notice,
+third-party exceptions included (the theme keeps those notices in its
+`licenses/` directory). `install.sh` installs the theme from that repository as
+it is and changes nothing in this repository's licence terms.
