@@ -45,10 +45,18 @@ if [[ ! -d $theme_dir ]]; then
   exit 1
 fi
 
+for entry in unlock.png preview-unlock.png backgrounds backgrounds/19-panorama-night.png; do
+  if [[ -L $theme_dir/$entry ]]; then
+    echo "Refusing to copy extras: $theme_dir/$entry is a symlink" >&2
+    exit 1
+  fi
+done
+
 # Real copies, not symlinks: Omarchy refuses a symlinked unlock.png.
-cp -- "$src/unlock.png" "$src/preview-unlock.png" "$theme_dir/"
+# --remove-destination replaces a leaf instead of writing through it.
+cp --remove-destination -- "$src/unlock.png" "$src/preview-unlock.png" "$theme_dir/"
 mkdir -p -- "$theme_dir/backgrounds"
-cp -- "$src"/backgrounds/* "$theme_dir/backgrounds/"
+cp --remove-destination -- "$src"/backgrounds/* "$theme_dir/backgrounds/"
 echo "Extras copied into $theme_dir"
 
 omarchy theme set "$theme"
