@@ -1,5 +1,7 @@
 # Turbo Pascal Theme Extras for Omarchy
 
+[![Support on Ko-fi](https://img.shields.io/badge/Support_on-Ko--fi-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/keasbeexd) [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor_on-GitHub-EA4AAA?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/keasbeexd)
+
 Two add-ons for [keylimesoda/omarchy-turbo-pascal-theme](https://github.com/keylimesoda/omarchy-turbo-pascal-theme),
 branch `main` — the branch the theme's own README installs from, and the one
 `omarchy theme install` clones:
